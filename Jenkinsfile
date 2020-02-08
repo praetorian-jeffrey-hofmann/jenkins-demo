@@ -35,10 +35,29 @@ def notifyAtomist(String workspaceIds, String buildStatus, String buildPhase="FI
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('Notify') {
             steps {
-                sh 'id'
+                echo 'Sending build start...'
+                notifyAtomist(ANCDLPDCO, 'STARTED', 'STARTED')
             }
+        }
+
+        stage('Set version') {
+            steps {
+                echo 'Setting version...'
+            }
+        }
+
+        stage('Build, Test, and Package') {
+            steps {
+                echo 'Building, testing, and packaging...'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Post notification...'
+            notifyAtomist("ANCDLPDCO", currentBuild.currentResult)
         }
     }
 }
