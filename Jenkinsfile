@@ -38,7 +38,7 @@ pipeline {
         stage('Notify') {
             steps {
                 echo 'Sending build start...'
-                notifyAtomist(ANCDLPDCO, 'STARTED', 'STARTED')
+                notifyAtomist("ANCDLPDCO", 'STARTED', 'STARTED')
             }
         }
 
